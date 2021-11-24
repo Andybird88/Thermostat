@@ -20,5 +20,14 @@ describe("thermostat",() => {
         expect(thermostat.getTemperature()).toBe(19)
 
     })
+    it('cannot be set below 10 degrees', () => {
+        const thermostat = new Thermostat;
+        for(let i=0 ; i<15; i++){
+            thermostat.down()
+        }
+        expect(thermostat.getTemperature()).toBe(10)
+
+    })
+
 });
 
