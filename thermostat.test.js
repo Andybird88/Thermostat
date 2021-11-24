@@ -14,5 +14,11 @@ describe("thermostat",() => {
         expect(thermostat.getTemperature()).toBe(21)
 
     })
+    it('can decrease the temperature', () => {
+        const thermostat = new Thermostat;
+        thermostat.down()
+        expect(thermostat.getTemperature()).toBe(19)
+
+    })
 });
 
