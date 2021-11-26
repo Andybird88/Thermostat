@@ -5,37 +5,40 @@ class Thermostat {
       this.powerSavingMode = true;
   }
   getTemperature() {
-          return this.temperature
+      if(this.powerSavingMode === true && this.temperature >= 25) {
+          return this.temperature + '(maximum reached)'
+      }
+      if(this.powerSavingMode === false && this.temperature >= 32) {
+          return this.temperature + '(maximum reached)'
+      }
+      if(this.temperature <= 10) {
+          return this.temperature + ' (minimum temp reached)'
+      }
+      return this.temperature
       };
      
-  
-
   up() {
       if (this.powerSavingMode === true) {
-          if (this.temperature === 25) {
-              return 'max temp reached'
+          if (this.temperature >= 25) {
+              this.temperature = 25;
           } else {
               this.temperature++
           }
           } else {
-              if (this.temperature === 32) {
-                  return 'max temp reached'
+              if (this.temperature >= 32) {
+                  this.temperature = 32;
               } else {
                   this.temperature++
               }
           }
       }
     
-    
-      
-      
-  
-  
-  down() {
+    down() {
     if (this.temperature > 10) {
-    this.temperature--
+       this.temperature--
     } else {
-        this.temperature = 10;
+       this.temperature = 10;
+       
     }
   };
 
@@ -66,32 +69,34 @@ class Thermostat {
 
 };
 
-const thermostat = new Thermostat();
 
-console.log(thermostat.getTemperature()); // should return 20
 
-thermostat.up();
-thermostat.up();
-console.log(thermostat.getTemperature()); // should now return 22
+// const thermostat = new Thermostat();
 
-thermostat.down();
-console.log(thermostat.getTemperature()); // should now return 21
+// console.log(thermostat.getTemperature()); // should return 20
 
-thermostat.setPowerSavingMode(true); // PSM is now on, max temperature is 25
+// thermostat.up();
+// thermostat.up();
+// console.log(thermostat.getTemperature()); // should now return 22
 
-for (let i = 0 ; i < 10 ; i++) {
-  thermostat.up();
-}
+// thermostat.down();
+// console.log(thermostat.getTemperature()); // should now return 21
 
-console.log(thermostat.getTemperature()); // should be 25 (max reached)
+// thermostat.setPowerSavingMode(true); // PSM is now on, max temperature is 25
 
-thermostat.setPowerSavingMode(false); // PSM is now off, max temperature is no more 25
+// for (let i = 0 ; i < 10 ; i++) {
+//   thermostat.up();
+// }
 
-thermostat.up();
-console.log(thermostat.getTemperature()); // should now return 26
+// console.log(thermostat.getTemperature()); // should be 25 (max reached)
 
-thermostat.reset();
-console.log(thermostat.getTemperature()); // should be back to 20
+// thermostat.setPowerSavingMode(false); // PSM is now off, max temperature is no more 25
+
+// thermostat.up();
+// console.log(thermostat.getTemperature()); // should now return 26
+
+// thermostat.reset();
+// console.log(thermostat.getTemperature()); // should be back to 20
 
 module.exports = Thermostat
 
